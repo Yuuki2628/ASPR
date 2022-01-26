@@ -53,6 +53,8 @@
             // 
             // cmbPersonality
             // 
+            this.cmbPersonality.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbPersonality.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbPersonality.FormattingEnabled = true;
             this.cmbPersonality.Location = new System.Drawing.Point(79, 6);
             this.cmbPersonality.Name = "cmbPersonality";
@@ -62,6 +64,8 @@
             // 
             // cmbMonster
             // 
+            this.cmbMonster.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbMonster.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbMonster.FormattingEnabled = true;
             this.cmbMonster.Location = new System.Drawing.Point(79, 34);
             this.cmbMonster.Name = "cmbMonster";

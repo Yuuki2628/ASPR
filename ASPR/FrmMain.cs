@@ -193,8 +193,8 @@ namespace ASPR
             dgwData.Rows[1].Cells[1].Value = $"{enemyStats[2]}";
             dgwData.Rows[2].Cells[1].Value = $"{enemyStats[3]}";
             dgwData.Rows[3].Cells[1].Value = $"{enemyStats[4]}";
-            dgwData.Rows[4].Cells[1].Value = $"{enemyPersonality[1]}";
-            dgwData.Rows[5].Cells[1].Value = $"{enemyPersonality[2]}";
+            dgwData.Rows[4].Cells[1].Value = $"{enemyStats[5]}";
+            dgwData.Rows[5].Cells[1].Value = $"{enemyPersonality[1]} / {enemyPersonality[2]}";
             dgwData.Rows[7].Cells[1].Value = $"{finalStats[0]}";
             dgwData.Rows[8].Cells[1].Value = $"{finalStats[1]}";
             dgwData.Rows[9].Cells[1].Value = $"{finalStats[2]}";
