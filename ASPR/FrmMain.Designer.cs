@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblPersonality = new System.Windows.Forms.Label();
             this.cmbPersonality = new System.Windows.Forms.ComboBox();
             this.cmbMonster = new System.Windows.Forms.ComboBox();
@@ -37,14 +38,14 @@
             this.clmValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnReload = new System.Windows.Forms.Button();
             this.btnFullReload = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tmrReload = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPersonality
             // 
             this.lblPersonality.AutoSize = true;
-            this.lblPersonality.Location = new System.Drawing.Point(12, 36);
+            this.lblPersonality.Location = new System.Drawing.Point(12, 10);
             this.lblPersonality.Name = "lblPersonality";
             this.lblPersonality.Size = new System.Drawing.Size(61, 13);
             this.lblPersonality.TabIndex = 0;
@@ -53,23 +54,25 @@
             // cmbPersonality
             // 
             this.cmbPersonality.FormattingEnabled = true;
-            this.cmbPersonality.Location = new System.Drawing.Point(79, 33);
+            this.cmbPersonality.Location = new System.Drawing.Point(79, 6);
             this.cmbPersonality.Name = "cmbPersonality";
             this.cmbPersonality.Size = new System.Drawing.Size(175, 21);
             this.cmbPersonality.TabIndex = 1;
+            this.cmbPersonality.SelectedIndexChanged += new System.EventHandler(this.cmbPersonality_SelectedIndexChanged);
             // 
             // cmbMonster
             // 
             this.cmbMonster.FormattingEnabled = true;
-            this.cmbMonster.Location = new System.Drawing.Point(79, 6);
+            this.cmbMonster.Location = new System.Drawing.Point(79, 34);
             this.cmbMonster.Name = "cmbMonster";
             this.cmbMonster.Size = new System.Drawing.Size(175, 21);
             this.cmbMonster.TabIndex = 3;
+            this.cmbMonster.SelectedIndexChanged += new System.EventHandler(this.cmbMonster_SelectedIndexChanged);
             // 
             // lblMonster
             // 
             this.lblMonster.AutoSize = true;
-            this.lblMonster.Location = new System.Drawing.Point(12, 9);
+            this.lblMonster.Location = new System.Drawing.Point(12, 37);
             this.lblMonster.Name = "lblMonster";
             this.lblMonster.Size = new System.Drawing.Size(38, 13);
             this.lblMonster.TabIndex = 2;
@@ -111,7 +114,7 @@
             // 
             // btnReload
             // 
-            this.btnReload.Location = new System.Drawing.Point(260, 6);
+            this.btnReload.Location = new System.Drawing.Point(260, 7);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(71, 21);
             this.btnReload.TabIndex = 5;
@@ -121,7 +124,7 @@
             // 
             // btnFullReload
             // 
-            this.btnFullReload.Location = new System.Drawing.Point(260, 33);
+            this.btnFullReload.Location = new System.Drawing.Point(260, 34);
             this.btnFullReload.Name = "btnFullReload";
             this.btnFullReload.Size = new System.Drawing.Size(71, 21);
             this.btnFullReload.TabIndex = 6;
@@ -129,22 +132,16 @@
             this.btnFullReload.UseVisualStyleBackColor = true;
             this.btnFullReload.Click += new System.EventHandler(this.btnFullReload_Click);
             // 
-            // button1
+            // tmrReload
             // 
-            this.button1.Location = new System.Drawing.Point(247, 286);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tmrReload.Interval = 1500;
+            this.tmrReload.Tick += new System.EventHandler(this.tmrReload_Tick);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 335);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnFullReload);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.dgwData);
@@ -173,7 +170,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmValue;
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnFullReload;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer tmrReload;
     }
 }
 

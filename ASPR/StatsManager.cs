@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ASPR
@@ -298,8 +297,6 @@ namespace ASPR
                 {"weary","0.6","0.9"}
             };
             _ = Request();
-
-            Thread.Sleep(1500);
         }
         /// <summary>
         /// Requests extra data to add to the array trough the github page and adds it to the array
@@ -309,7 +306,8 @@ namespace ASPR
             string risposta;
             using (HttpClient client = new HttpClient())
             {
-                string url = @"#TBA";
+                //uses the raw link to download directly the file content
+                string url = @"https://raw.githubusercontent.com/Yuuki2628/ASPR/master/ASPR/additionalStats.txt";
 
                 risposta = await client.GetStringAsync(url);
             }
@@ -337,6 +335,10 @@ namespace ASPR
             }
         }
 
+        /// <summary>
+        /// Increases the lenght of the stats array
+        /// </summary>
+        /// <param name="count">amount of new rows to add</param>
         private void Append(int count)
         {
             string[,] array = new string[enemiesCount, 6];
@@ -346,7 +348,12 @@ namespace ASPR
             stats = array;
         }
 
-        public void Switch(ref string a, ref string b) //switches 2 variable's content
+        /// <summary>
+        /// Switches 2 variables content, currently unused
+        /// </summary>
+        /// <param name="a">var 1</param>
+        /// <param name="b">var 2</param>
+        public void Switch(ref string a, ref string b)
         {
             string temp = a;
             a = b;
