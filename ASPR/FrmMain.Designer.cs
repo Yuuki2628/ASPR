@@ -156,7 +156,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FrmMain";
-            this.Text = "ASPR [v1.0]";
+            this.Text = "ASPR [v1.0] by Yuuki";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).EndInit();
             this.ResumeLayout(false);
