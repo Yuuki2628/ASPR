@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,6 +15,20 @@ namespace ASPR
     public partial class FrmMain : Form
     {
         StatsManager s;
+        string[,] topTen = new string[10, 2]
+        {
+            {"","0"},
+            {"","0"},
+            {"","0"},
+            {"","0"},
+            {"","0"},
+            {"","0"},
+            {"","0"},
+            {"","0"},
+            {"","0"},
+            {"","0"}
+        };
+
 
         public FrmMain()
         {
@@ -60,9 +75,11 @@ namespace ASPR
             dgwData.Rows[10].Cells[0].Style.BackColor = Color.DarkGray;
             dgwData.Rows[10].Cells[1].Style.BackColor = Color.DarkGray;
 
+            dgwData.RowHeadersVisible = false;
+
             //setting the width so nothing is hidden
-            dgwData.Columns[0].Width = 110;
-            dgwData.Columns[1].Width = 90;
+            dgwData.Columns[0].Width = 120;
+            dgwData.Columns[1].Width = 120;
 
             //loads everything
             FullReload();
@@ -107,6 +124,27 @@ namespace ASPR
             }
             cmbMonster.SelectedIndex = 0;
             cmbPersonality.SelectedIndex = 0;
+
+            // empties the top ten list
+            topTen = new string[10, 2]
+            {
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"}
+            };
+
+            //meme lol
+            dgwData.Rows[10].Cells[0].Value = "Don't do drugs...";
+            dgwData.Rows[10].Cells[1].Value = "Do Yuuki Instead";
+
+            btnGetTop.Text = "Get Top";
         }
 
         /// <summary>
@@ -176,6 +214,8 @@ namespace ASPR
                 s[indexP, 2, "p"],  //talk res
             };
 
+            // used to 
+            NumberFormatInfo numberInfo = CultureInfo.CurrentCulture.NumberFormat;
             /* calculates the final stats by multiplying the interested stats
              * finalStab = hp * stab resistance * attack resistance
              * finalMagic = hp * magic resistance * attack resistance
@@ -183,9 +223,9 @@ namespace ASPR
              */
             double[] finalStats = new double[] 
             {
-                Convert.ToDouble(enemyStats[1].Replace('.', ',')) * Convert.ToDouble(enemyStats[3].Replace('.', ',')) * Convert.ToDouble(enemyPersonality[1].Replace('.', ',')),
-                Convert.ToDouble(enemyStats[1].Replace('.', ',')) * Convert.ToDouble(enemyStats[4].Replace('.', ',')) * Convert.ToDouble(enemyPersonality[1].Replace('.', ',')),
-                Convert.ToDouble(enemyStats[2].Replace('.', ',')) * Convert.ToDouble(enemyStats[5].Replace('.', ',')) * Convert.ToDouble(enemyPersonality[2].Replace('.', ','))
+                GetDouble(enemyStats[1]) * GetDouble(enemyStats[3]) * GetDouble(enemyPersonality[1]),
+                GetDouble(enemyStats[1]) * GetDouble(enemyStats[4]) * GetDouble(enemyPersonality[1]),
+                GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]) * GetDouble(enemyPersonality[2])
             };
 
             //prints out everything on the table
@@ -199,6 +239,25 @@ namespace ASPR
             dgwData.Rows[8].Cells[1].Value = $"{finalStats[1]}";
             dgwData.Rows[9].Cells[1].Value = $"{finalStats[2]}";
 
+            if (topTen[0, 0] != "")
+            {
+                bool gotEm = false;
+                for (int i = 0; i < 10 && !gotEm; i++)
+                    if (enemyStats[0] == topTen[i, 0])
+                    {
+                        dgwData.Rows[10].Cells[0].Value = $"This is the top #{i + 1}";
+                        dgwData.Rows[10].Cells[1].Value = $"Strenght: {GetDouble(topTen[i, 1])}";
+                        gotEm = true;
+                    }
+                if(!gotEm)
+                {
+                    /* HP * (StabR + MagicR) / 2 + Dipl * DiplR */
+                    double strenght = ((finalStats[0] + finalStats[1]) / 2) + (finalStats[2]);
+
+                    dgwData.Rows[10].Cells[0].Value = $"This not a top enemy";
+                    dgwData.Rows[10].Cells[1].Value = $"Strenght: {strenght}";
+                }
+            }
         }
 
         private void cmbMonster_SelectedIndexChanged(object sender, EventArgs e)
@@ -211,6 +270,141 @@ namespace ASPR
         {
             if (cmbPersonality.SelectedIndex < s.personalitiesN)
                 UpdateStats();
+        }
+
+        /// <summary>
+        /// Gets the top 10 strongest enemies in the game
+        /// </summary>
+        private void getTopTen()
+        {
+            topTen = new string[10, 2]
+            {
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"},
+                {"","0"}
+            };
+
+            for (int i = 0; i < s.enemiesN; i++)
+            {
+                string[] enemyStats = new string[] //array with every stat of the monster
+                {
+                    s[i, 0, "e"],  //name
+                    s[i, 1, "e"],  //hp
+                    s[i, 2, "e"],  //diplo
+                    s[i, 3, "e"],  //physical res
+                    s[i, 4, "e"],  //magical red
+                    s[i, 5, "e"],  //diplo res
+                };
+
+                string[] enemyPersonality = new string[] // array containing the personality multipliers
+                {
+                    s[12, 0, "p"],  //name
+                    s[12, 1, "p"],  //attack res
+                    s[12, 2, "p"],  //talk res
+                };
+
+                NumberFormatInfo numberInfo = CultureInfo.CurrentCulture.NumberFormat;
+                double[] finalStats = new double[]
+                {
+                    GetDouble(enemyStats[1]) * GetDouble(enemyStats[3]) * GetDouble(enemyPersonality[1]),
+                    GetDouble(enemyStats[1]) * GetDouble(enemyStats[4]) * GetDouble(enemyPersonality[1]),
+                    GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]) * GetDouble(enemyPersonality[2])
+                };
+
+                /* HP * (StabR + MagicR) / 2 + Dipl * DiplR */
+                double strenght = ((finalStats[0] + finalStats[1]) / 2) + (finalStats[2]);
+
+                for (int j = 0; j < 10; j++)
+                {
+                    if (strenght > GetDouble(topTen[j, 1]))
+                    {
+                        ShiftTopTen(enemyStats[0], strenght, j);
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        private double GetDouble(string s) => Double.Parse(s.Replace(',', '.'), CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// Moves the content of the list to the left by one adding the stronger one
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="strengh"></param>
+        /// <param name="j"></param>
+        private void ShiftTopTen(string name, double strengh, int j)
+        {
+            string[] temp = new string[2]
+            {
+                topTen[j, 0],
+                topTen[j, 1]
+            };
+
+            if (name == "Raven" || name == "Orc Peon")
+                return;
+
+            topTen[j, 0] = name;
+            topTen[j, 1] = strengh.ToString();
+
+            j++;
+            try
+            {
+                if (topTen[j, 0] == null || topTen[j + 1, 0] == null || topTen[j + 1, 0] == "")
+                    return;
+            }
+            catch { return; }
+
+            if (j < 9)
+            {
+                ShiftTopTen(temp[0], GetDouble(temp[1]), j);
+            }
+        }
+
+        int nClicks = 0;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (nClicks == 0)
+            { 
+                btnGetTop.Text = "Are you sure?";
+                nClicks++;
+            }
+            else
+            {
+                getTopTen();
+                btnGetTop.Text = "Got it!";
+                nClicks = 0;
+            }
+        }
+
+        private void btnChangelog_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("" +
+                "~~~ v1.0 ~~~" +
+                "\n- all the code has been rewritten" +
+                "\n- performance upgrades" +
+                "\n- removed Nega calculator" +
+                "\n" +
+                "\n ~~~ v1.1 ~~~" +
+                "\n- first fix for international double conversions" +
+                "\n" +
+                "\n ~~~ v2.0 ~~~" +
+                "\n- added a button to see the top 10 strongest enemies" +
+                "\n- final fix for international double conversions" +
+                "\n- added this Changelog button" +
+                "\n" +
+                "\n Coming Soon:" +
+                "\n- a way to see the top 10 listed"
+
+                , "Changelog", MessageBoxButtons.OK);
         }
     }
 }

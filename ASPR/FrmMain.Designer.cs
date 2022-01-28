@@ -39,6 +39,8 @@
             this.btnReload = new System.Windows.Forms.Button();
             this.btnFullReload = new System.Windows.Forms.Button();
             this.tmrReload = new System.Windows.Forms.Timer(this.components);
+            this.btnGetTop = new System.Windows.Forms.Button();
+            this.btnChangelog = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,11 +143,33 @@
             this.tmrReload.Interval = 1500;
             this.tmrReload.Tick += new System.EventHandler(this.tmrReload_Tick);
             // 
+            // btnGetTop
+            // 
+            this.btnGetTop.Location = new System.Drawing.Point(260, 61);
+            this.btnGetTop.Name = "btnGetTop";
+            this.btnGetTop.Size = new System.Drawing.Size(71, 35);
+            this.btnGetTop.TabIndex = 7;
+            this.btnGetTop.Text = "Get Top";
+            this.btnGetTop.UseVisualStyleBackColor = true;
+            this.btnGetTop.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnChangelog
+            // 
+            this.btnChangelog.Location = new System.Drawing.Point(260, 304);
+            this.btnChangelog.Name = "btnChangelog";
+            this.btnChangelog.Size = new System.Drawing.Size(71, 21);
+            this.btnChangelog.TabIndex = 8;
+            this.btnChangelog.Text = "Changelog";
+            this.btnChangelog.UseVisualStyleBackColor = true;
+            this.btnChangelog.Click += new System.EventHandler(this.btnChangelog_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 335);
+            this.Controls.Add(this.btnChangelog);
+            this.Controls.Add(this.btnGetTop);
             this.Controls.Add(this.btnFullReload);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.dgwData);
@@ -156,7 +180,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FrmMain";
-            this.Text = "ASPR [v1.0] by Yuuki";
+            this.Text = "ASPR [v2.0] by Yuuki";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).EndInit();
             this.ResumeLayout(false);
@@ -175,6 +199,8 @@
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnFullReload;
         private System.Windows.Forms.Timer tmrReload;
+        private System.Windows.Forms.Button btnGetTop;
+        private System.Windows.Forms.Button btnChangelog;
     }
 }
 

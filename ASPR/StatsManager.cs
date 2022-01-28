@@ -49,7 +49,7 @@ namespace ASPR
         public StatsManager()
         {
             stats = new string[,]
-{
+            {
                 {"Tame Dove","546.5","530.5","1.2","1.2","1.0"},
                 {"Weasel","512.75","538.75","1.2","1.2","1.0"},
                 {"Bat","543.0","511.5","1.01","1.55","1.0"},
@@ -256,7 +256,7 @@ namespace ASPR
                 {"Celestial Wyrm","1103.5","1237.0","1.8","1.4","1.0"},
                 {"Golden Guardian Wyrm","1283.5","1629.0","1.8","1.2","1.0"},
                 {"Quintessence Dragon","1353.0","1663.0","1.24","2.11","1.0"},
-};
+            };
 
             personality = new string[,]
             {
