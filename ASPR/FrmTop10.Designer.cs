@@ -41,7 +41,7 @@
             this.btnDone.Location = new System.Drawing.Point(260, 256);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(71, 21);
-            this.btnDone.TabIndex = 6;
+            this.btnDone.TabIndex = 1;
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = true;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
@@ -61,7 +61,7 @@
             this.dgwTop.Name = "dgwTop";
             this.dgwTop.ReadOnly = true;
             this.dgwTop.Size = new System.Drawing.Size(242, 265);
-            this.dgwTop.TabIndex = 7;
+            this.dgwTop.TabIndex = 0;
             // 
             // clmPosition
             // 

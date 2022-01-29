@@ -446,7 +446,8 @@ namespace ASPR
                 "\n- added a \"secret\", if you find it don't let anyone know" +
                 "\n" +
                 "\n ~~~v2.1B ~~~" +
-                "\n-fixed a bug in the strength calculation formula"
+                "\n-fixed a bug in the strength calculation formula" +
+                "\n-fixed the TAB order"
                 , "Changelog", MessageBoxButtons.OK);
         }
     }

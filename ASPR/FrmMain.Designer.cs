@@ -160,7 +160,7 @@
             this.btnChangelog.Location = new System.Drawing.Point(260, 304);
             this.btnChangelog.Name = "btnChangelog";
             this.btnChangelog.Size = new System.Drawing.Size(71, 21);
-            this.btnChangelog.TabIndex = 8;
+            this.btnChangelog.TabIndex = 10;
             this.btnChangelog.Text = "Changelog";
             this.btnChangelog.UseVisualStyleBackColor = true;
             this.btnChangelog.Click += new System.EventHandler(this.btnChangelog_Click);
@@ -170,7 +170,7 @@
             this.btnDisplayTop.Location = new System.Drawing.Point(260, 102);
             this.btnDisplayTop.Name = "btnDisplayTop";
             this.btnDisplayTop.Size = new System.Drawing.Size(71, 21);
-            this.btnDisplayTop.TabIndex = 9;
+            this.btnDisplayTop.TabIndex = 8;
             this.btnDisplayTop.Text = "Display Top";
             this.btnDisplayTop.UseVisualStyleBackColor = true;
             this.btnDisplayTop.Click += new System.EventHandler(this.btnDisplayTop_Click);
@@ -180,7 +180,7 @@
             this.btnInvisible.Location = new System.Drawing.Point(260, 263);
             this.btnInvisible.Name = "btnInvisible";
             this.btnInvisible.Size = new System.Drawing.Size(71, 35);
-            this.btnInvisible.TabIndex = 10;
+            this.btnInvisible.TabIndex = 9;
             this.btnInvisible.UseVisualStyleBackColor = true;
             this.btnInvisible.Click += new System.EventHandler(this.btnInvisible_Click);
             // 
