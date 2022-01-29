@@ -204,7 +204,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.ShowIcon = false;
-            this.Text = "ASPR [v2.1] by Yuuki";
+            this.Text = "ASPR [v2.1B] by Yuuki";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).EndInit();
             this.ResumeLayout(false);

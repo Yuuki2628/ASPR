@@ -236,8 +236,6 @@ namespace ASPR
                 s[indexP, 2, "p"],  //talk res
             };
 
-            // used to 
-            NumberFormatInfo numberInfo = CultureInfo.CurrentCulture.NumberFormat;
             /* calculates the final stats by multiplying the interested stats
              * finalStab = hp * stab resistance * attack resistance
              * finalMagic = hp * magic resistance * attack resistance
@@ -273,8 +271,8 @@ namespace ASPR
                     }
                 if(!gotEm)
                 {
-                    /* ((HP * PhysicalResistance) + (Hp * MagicalResistance)) / 2 + (Diplomacy * PersuasionDefence) */
-                    double strength = ((finalStats[0] + finalStats[1]) / 2) + (finalStats[2]);
+                    /* (HP * ((PhysicalResistance + MagicalResistance) / 2)) + (Diplomacy * PersuasionDefence) */
+                    double strength = (GetDouble(enemyStats[1]) * ((GetDouble(enemyStats[3]) + GetDouble(enemyStats[4])) / 2)) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5]));
 
                     dgwData.Rows[10].Cells[0].Value = $"This not a top enemy";
                     dgwData.Rows[10].Cells[1].Value = $"Strenght: {strength}";
@@ -340,8 +338,8 @@ namespace ASPR
                     GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]) * GetDouble(enemyPersonality[2])
                 };
 
-                /* ((HP * PhysicalResistance) + (Hp * MagicalResistance)) / 2 + (Diplomacy * PersuasionDefence) */
-                double strength = ((finalStats[0] + finalStats[1]) / 2) + (finalStats[2]);
+                /* (HP * ((PhysicalResistance + MagicalResistance) / 2)) + (Diplomacy * PersuasionDefence) */
+                double strength = (GetDouble(enemyStats[1]) * ((GetDouble(enemyStats[3]) + GetDouble(enemyStats[4])) / 2)) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5]));
 
                 for (int j = 0; j < 10; j++)
                 {
@@ -445,7 +443,10 @@ namespace ASPR
                 "\n- added a Form to view the top 10 strongest enemies" +
                 "\n- QOL improvements" +
                 "\n- during the loading time now every button will be off" +
-                "\n- added a \"secret\", if you find it don't let anyone know"
+                "\n- added a \"secret\", if you find it don't let anyone know" +
+                "\n" +
+                "\n ~~~v2.1B ~~~" +
+                "\n-fixed a bug in the strength calculation formula"
                 , "Changelog", MessageBoxButtons.OK);
         }
     }
