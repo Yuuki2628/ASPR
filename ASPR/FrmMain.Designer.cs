@@ -42,6 +42,7 @@
             this.btnGetTop = new System.Windows.Forms.Button();
             this.btnChangelog = new System.Windows.Forms.Button();
             this.btnDisplayTop = new System.Windows.Forms.Button();
+            this.btnInvisible = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,11 +175,21 @@
             this.btnDisplayTop.UseVisualStyleBackColor = true;
             this.btnDisplayTop.Click += new System.EventHandler(this.btnDisplayTop_Click);
             // 
+            // btnInvisible
+            // 
+            this.btnInvisible.Location = new System.Drawing.Point(260, 263);
+            this.btnInvisible.Name = "btnInvisible";
+            this.btnInvisible.Size = new System.Drawing.Size(71, 35);
+            this.btnInvisible.TabIndex = 10;
+            this.btnInvisible.UseVisualStyleBackColor = true;
+            this.btnInvisible.Click += new System.EventHandler(this.btnInvisible_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 335);
+            this.Controls.Add(this.btnInvisible);
             this.Controls.Add(this.btnDisplayTop);
             this.Controls.Add(this.btnChangelog);
             this.Controls.Add(this.btnGetTop);
@@ -193,7 +204,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.ShowIcon = false;
-            this.Text = "ASPR [v2.0] by Yuuki";
+            this.Text = "ASPR [v2.1] by Yuuki";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).EndInit();
             this.ResumeLayout(false);
@@ -215,6 +226,7 @@
         private System.Windows.Forms.Button btnGetTop;
         private System.Windows.Forms.Button btnChangelog;
         private System.Windows.Forms.Button btnDisplayTop;
+        private System.Windows.Forms.Button btnInvisible;
     }
 }
 

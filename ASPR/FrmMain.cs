@@ -46,6 +46,7 @@ namespace ASPR
             btnFullReload.Enabled = false;
             btnGetTop.Enabled = false;
             btnReload.Enabled = false;
+            btnInvisible.Enabled = false;
 
             /*
              * HP
@@ -90,6 +91,11 @@ namespace ASPR
             //setting the width so everything is visible
             dgwData.Columns[0].Width = 120;
             dgwData.Columns[1].Width = 120;
+
+            btnInvisible.FlatStyle = FlatStyle.Flat;
+            btnInvisible.FlatAppearance.BorderColor = BackColor;
+            btnInvisible.FlatAppearance.MouseOverBackColor = BackColor;
+            btnInvisible.FlatAppearance.MouseDownBackColor = BackColor;
 
             //loads everything
             FullReload();
@@ -197,6 +203,7 @@ namespace ASPR
             btnFullReload.Enabled = true;
             btnGetTop.Enabled = true;
             btnReload.Enabled = true;
+            btnInvisible.Enabled = true;
         }
 
         /// <summary>
@@ -344,7 +351,6 @@ namespace ASPR
                         break;
                     }
                 }
-
             }
         }
 
@@ -414,6 +420,11 @@ namespace ASPR
             frmTop10.ShowDialog();
         }
 
+        private void btnInvisible_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("You found a secret. WOW!\nLet Yuuki know by saying: \"Nerf Link471\" in chat", "You're amazing");
+        }
+
         private void btnChangelog_Click(object sender, EventArgs e)
         {
             MessageBox.Show("" +
@@ -433,7 +444,8 @@ namespace ASPR
                 "\n ~~~ v2.1 ~~~" +
                 "\n- added a Form to view the top 10 strongest enemies" +
                 "\n- QOL improvements" +
-                "\n- during the loading time now every button will be off"
+                "\n- during the loading time now every button will be off" +
+                "\n- added a \"secret\", if you find it don't let anyone know"
                 , "Changelog", MessageBoxButtons.OK);
         }
     }
