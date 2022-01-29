@@ -41,6 +41,7 @@
             this.tmrReload = new System.Windows.Forms.Timer(this.components);
             this.btnGetTop = new System.Windows.Forms.Button();
             this.btnChangelog = new System.Windows.Forms.Button();
+            this.btnDisplayTop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,7 +141,7 @@
             // 
             // tmrReload
             // 
-            this.tmrReload.Interval = 1500;
+            this.tmrReload.Interval = 1000;
             this.tmrReload.Tick += new System.EventHandler(this.tmrReload_Tick);
             // 
             // btnGetTop
@@ -163,11 +164,22 @@
             this.btnChangelog.UseVisualStyleBackColor = true;
             this.btnChangelog.Click += new System.EventHandler(this.btnChangelog_Click);
             // 
+            // btnDisplayTop
+            // 
+            this.btnDisplayTop.Location = new System.Drawing.Point(260, 102);
+            this.btnDisplayTop.Name = "btnDisplayTop";
+            this.btnDisplayTop.Size = new System.Drawing.Size(71, 21);
+            this.btnDisplayTop.TabIndex = 9;
+            this.btnDisplayTop.Text = "Display Top";
+            this.btnDisplayTop.UseVisualStyleBackColor = true;
+            this.btnDisplayTop.Click += new System.EventHandler(this.btnDisplayTop_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 335);
+            this.Controls.Add(this.btnDisplayTop);
             this.Controls.Add(this.btnChangelog);
             this.Controls.Add(this.btnGetTop);
             this.Controls.Add(this.btnFullReload);
@@ -180,6 +192,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FrmMain";
+            this.ShowIcon = false;
             this.Text = "ASPR [v2.0] by Yuuki";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).EndInit();
@@ -201,6 +214,7 @@
         private System.Windows.Forms.Timer tmrReload;
         private System.Windows.Forms.Button btnGetTop;
         private System.Windows.Forms.Button btnChangelog;
+        private System.Windows.Forms.Button btnDisplayTop;
     }
 }
 

@@ -29,7 +29,11 @@ namespace ASPR
             {"","0"}
         };
 
-
+        public string[,] obtainTopTen
+        {
+            get { return topTen; }
+            private set { }
+        }
         public FrmMain()
         {
             InitializeComponent();
@@ -37,13 +41,18 @@ namespace ASPR
             dgwData.RowCount = 11;
             cmbMonster.Enabled = false;
             cmbPersonality.Enabled = false;
+            btnChangelog.Enabled = false;
+            btnDisplayTop.Enabled = false;
+            btnFullReload.Enabled = false;
+            btnGetTop.Enabled = false;
+            btnReload.Enabled = false;
 
             /*
              * HP
              * Diplomacy
-             * Physical Defence
-             * Magical Defence
-             * Persuasion Defence
+             * Physical Resistance
+             * Magical Resistance
+             * Persuasion Resistance
              * 
              * Personality values
              * 
@@ -55,9 +64,9 @@ namespace ASPR
             // Setting up the first column with the identifies of each value
             dgwData.Rows[0].Cells[0].Value = "HP:";
             dgwData.Rows[1].Cells[0].Value = "Diplomacy:";
-            dgwData.Rows[2].Cells[0].Value = "Physical Defence:";
-            dgwData.Rows[3].Cells[0].Value = "Magical Defence:";
-            dgwData.Rows[4].Cells[0].Value = "Persuasion Defence:";
+            dgwData.Rows[2].Cells[0].Value = "Physical Resistance:";
+            dgwData.Rows[3].Cells[0].Value = "Magical Resistance:";
+            dgwData.Rows[4].Cells[0].Value = "Persuasion Resistance:";
             dgwData.Rows[5].Cells[0].Value = "Personality Values:";
             dgwData.Rows[6].Cells[0].Value = "Final Results:";
             dgwData.Rows[7].Cells[0].Value = "Stab:";
@@ -65,8 +74,8 @@ namespace ASPR
             dgwData.Rows[9].Cells[0].Value = "Diplomacy:";
 
             //meme lol
-            dgwData.Rows[10].Cells[0].Value = "Don't do drugs...";
-            dgwData.Rows[10].Cells[1].Value = "Do Yuuki Instead";
+            dgwData.Rows[10].Cells[0].Value = "This part is useless...";
+            dgwData.Rows[10].Cells[1].Value = "Get Top 10 now";
 
             //setting the background for the separator line and meme line
             dgwData.Rows[6].Cells[0].Style.BackColor = Color.DarkGray;
@@ -75,9 +84,10 @@ namespace ASPR
             dgwData.Rows[10].Cells[0].Style.BackColor = Color.DarkGray;
             dgwData.Rows[10].Cells[1].Style.BackColor = Color.DarkGray;
 
+            /* Hides the first annoying column */
             dgwData.RowHeadersVisible = false;
 
-            //setting the width so nothing is hidden
+            //setting the width so everything is visible
             dgwData.Columns[0].Width = 120;
             dgwData.Columns[1].Width = 120;
 
@@ -141,8 +151,8 @@ namespace ASPR
             };
 
             //meme lol
-            dgwData.Rows[10].Cells[0].Value = "Don't do drugs...";
-            dgwData.Rows[10].Cells[1].Value = "Do Yuuki Instead";
+            dgwData.Rows[10].Cells[0].Value = "This part is useless...";
+            dgwData.Rows[10].Cells[1].Value = "Get Top 10 now";
 
             btnGetTop.Text = "Get Top";
         }
@@ -182,6 +192,11 @@ namespace ASPR
 
             cmbMonster.Enabled = true;
             cmbPersonality.Enabled = true;
+            btnChangelog.Enabled = true;
+            btnDisplayTop.Enabled = true;
+            btnFullReload.Enabled = true;
+            btnGetTop.Enabled = true;
+            btnReload.Enabled = true;
         }
 
         /// <summary>
@@ -251,11 +266,11 @@ namespace ASPR
                     }
                 if(!gotEm)
                 {
-                    /* HP * (StabR + MagicR) / 2 + Dipl * DiplR */
-                    double strenght = ((finalStats[0] + finalStats[1]) / 2) + (finalStats[2]);
+                    /* ((HP * PhysicalResistance) + (Hp * MagicalResistance)) / 2 + (Diplomacy * PersuasionDefence) */
+                    double strength = ((finalStats[0] + finalStats[1]) / 2) + (finalStats[2]);
 
                     dgwData.Rows[10].Cells[0].Value = $"This not a top enemy";
-                    dgwData.Rows[10].Cells[1].Value = $"Strenght: {strenght}";
+                    dgwData.Rows[10].Cells[1].Value = $"Strenght: {strength}";
                 }
             }
         }
@@ -318,14 +333,14 @@ namespace ASPR
                     GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]) * GetDouble(enemyPersonality[2])
                 };
 
-                /* HP * (StabR + MagicR) / 2 + Dipl * DiplR */
-                double strenght = ((finalStats[0] + finalStats[1]) / 2) + (finalStats[2]);
+                /* ((HP * PhysicalResistance) + (Hp * MagicalResistance)) / 2 + (Diplomacy * PersuasionDefence) */
+                double strength = ((finalStats[0] + finalStats[1]) / 2) + (finalStats[2]);
 
                 for (int j = 0; j < 10; j++)
                 {
-                    if (strenght > GetDouble(topTen[j, 1]))
+                    if (strength > GetDouble(topTen[j, 1]))
                     {
-                        ShiftTopTen(enemyStats[0], strenght, j);
+                        ShiftTopTen(enemyStats[0], strength, j);
                         break;
                     }
                 }
@@ -385,6 +400,20 @@ namespace ASPR
             }
         }
 
+        private void btnDisplayTop_Click(object sender, EventArgs e)
+        {
+            if (topTen[0, 0] == "")
+            {
+                MessageBox.Show("You haven't gotten the top 10 enemies yet", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            FrmMain frmMain = this;
+
+            FrmTop10 frmTop10 = new FrmTop10(this);
+            frmTop10.ShowDialog();
+        }
+
         private void btnChangelog_Click(object sender, EventArgs e)
         {
             MessageBox.Show("" +
@@ -401,9 +430,10 @@ namespace ASPR
                 "\n- final fix for international double conversions" +
                 "\n- added this Changelog button" +
                 "\n" +
-                "\n Coming Soon:" +
-                "\n- a way to see the top 10 listed"
-
+                "\n ~~~ v2.1 ~~~" +
+                "\n- added a Form to view the top 10 strongest enemies" +
+                "\n- QOL improvements" +
+                "\n- during the loading time now every button will be off"
                 , "Changelog", MessageBoxButtons.OK);
         }
     }
