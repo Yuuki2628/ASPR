@@ -46,7 +46,6 @@ namespace ASPR
             btnFullReload.Enabled = false;
             btnGetTop.Enabled = false;
             btnReload.Enabled = false;
-            btnInvisible.Enabled = false;
 
             /*
              * HP
@@ -92,10 +91,10 @@ namespace ASPR
             dgwData.Columns[0].Width = 120;
             dgwData.Columns[1].Width = 120;
 
-            btnInvisible.FlatStyle = FlatStyle.Flat;
+            /*btnInvisible.FlatStyle = FlatStyle.Flat;
             btnInvisible.FlatAppearance.BorderColor = BackColor;
             btnInvisible.FlatAppearance.MouseOverBackColor = BackColor;
-            btnInvisible.FlatAppearance.MouseDownBackColor = BackColor;
+            btnInvisible.FlatAppearance.MouseDownBackColor = BackColor;*/
 
             //loads everything
             FullReload();
@@ -203,7 +202,6 @@ namespace ASPR
             btnFullReload.Enabled = true;
             btnGetTop.Enabled = true;
             btnReload.Enabled = true;
-            btnInvisible.Enabled = true;
         }
 
         /// <summary>
@@ -266,7 +264,7 @@ namespace ASPR
                     if (enemyStats[0] == topTen[i, 0])
                     {
                         dgwData.Rows[10].Cells[0].Value = $"This is the top #{i + 1}";
-                        dgwData.Rows[10].Cells[1].Value = $"Strenght: {GetDouble(topTen[i, 1])}";
+                        dgwData.Rows[10].Cells[1].Value = $"Strength: {GetDouble(topTen[i, 1])}";
                         gotEm = true;
                     }
                 if(!gotEm)
@@ -275,7 +273,7 @@ namespace ASPR
                     double strength = (GetDouble(enemyStats[1]) * ((GetDouble(enemyStats[3]) + GetDouble(enemyStats[4])) / 2)) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5]));
 
                     dgwData.Rows[10].Cells[0].Value = $"This not a top enemy";
-                    dgwData.Rows[10].Cells[1].Value = $"Strenght: {strength}";
+                    dgwData.Rows[10].Cells[1].Value = $"Strength: {strength}";
                 }
             }
         }
@@ -352,7 +350,7 @@ namespace ASPR
             }
         }
 
-        private double GetDouble(string s) => Double.Parse(s.Replace(',', '.'), CultureInfo.InvariantCulture);
+        private double GetDouble(string s) => Math.Round((Double.Parse(s.Replace(',', '.'), CultureInfo.InvariantCulture)), 2);
 
         /// <summary>
         /// Moves the content of the list to the left by one adding the stronger one
@@ -418,11 +416,6 @@ namespace ASPR
             frmTop10.ShowDialog();
         }
 
-        private void btnInvisible_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("You found a secret. WOW!\nLet Yuuki know by saying: \"Nerf Link471\" in chat", "You're amazing");
-        }
-
         private void btnChangelog_Click(object sender, EventArgs e)
         {
             MessageBox.Show("" +
@@ -443,11 +436,14 @@ namespace ASPR
                 "\n- added a Form to view the top 10 strongest enemies" +
                 "\n- QOL improvements" +
                 "\n- during the loading time now every button will be off" +
-                "\n- added a \"secret\", if you find it don't let anyone know" +
                 "\n" +
-                "\n ~~~v2.1B ~~~" +
+                "\n ~~~ v2.1B ~~~" +
                 "\n-fixed a bug in the strength calculation formula" +
-                "\n-fixed the TAB order"
+                "\n-fixed the TAB order" +
+                "\n" +
+                "\n ~~~ v2.1C ~~~" +
+                "\n-fixed spelling mistakes" +
+                "\n-now strength values are rounded to 2 decimals"
                 , "Changelog", MessageBoxButtons.OK);
         }
     }
