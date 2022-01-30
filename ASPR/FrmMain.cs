@@ -328,24 +328,22 @@ namespace ASPR
                     s[12, 2, "p"],  //talk res
                 };
 
-                NumberFormatInfo numberInfo = CultureInfo.CurrentCulture.NumberFormat;
-                double[] finalStats = new double[]
-                {
-                    GetDouble(enemyStats[1]) * GetDouble(enemyStats[3]) * GetDouble(enemyPersonality[1]),
-                    GetDouble(enemyStats[1]) * GetDouble(enemyStats[4]) * GetDouble(enemyPersonality[1]),
-                    GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]) * GetDouble(enemyPersonality[2])
-                };
-
                 /* (HP * ((PhysicalResistance + MagicalResistance) / 2)) + (Diplomacy * PersuasionDefence) */
                 double strength = (GetDouble(enemyStats[1]) * ((GetDouble(enemyStats[3]) + GetDouble(enemyStats[4])) / 2)) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5]));
 
                 for (int j = 0; j < 10; j++)
                 {
-                    if (strength > GetDouble(topTen[j, 1]))
+                    if (j != 9 && strength > GetDouble(topTen[j, 1]))
                     {
                         ShiftTopTen(enemyStats[0], strength, j);
                         break;
                     }
+                    if (j == 9 && strength > GetDouble(topTen[j, 1]))
+                    {
+                        topTen[j, 0] = enemyStats[0];
+                        topTen[j, 1] = strength.ToString();
+                    }
+
                 }
             }
         }
@@ -356,9 +354,9 @@ namespace ASPR
         /// Moves the content of the list to the left by one adding the stronger one
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="strengh"></param>
+        /// <param name="strength"></param>
         /// <param name="j"></param>
-        private void ShiftTopTen(string name, double strengh, int j)
+        private void ShiftTopTen(string name, double strength, int j)
         {
             string[] temp = new string[2]
             {
@@ -370,20 +368,16 @@ namespace ASPR
                 return;
 
             topTen[j, 0] = name;
-            topTen[j, 1] = strengh.ToString();
+            topTen[j, 1] = strength.ToString();
 
             j++;
             try
             {
-                if (topTen[j, 0] == null || topTen[j + 1, 0] == null || topTen[j + 1, 0] == "")
-                    return;
+                if (topTen[j, 0] != null)
+                    if (j <= 9)
+                        ShiftTopTen(temp[0], GetDouble(temp[1]), j);
             }
             catch { return; }
-
-            if (j < 9)
-            {
-                ShiftTopTen(temp[0], GetDouble(temp[1]), j);
-            }
         }
 
         int nClicks = 0;
@@ -443,7 +437,10 @@ namespace ASPR
                 "\n" +
                 "\n ~~~ v2.1C ~~~" +
                 "\n-fixed spelling mistakes" +
-                "\n-now strength values are rounded to 2 decimals"
+                "\n-now strength values are rounded to 2 decimals" +
+                "\n" +
+                "\n ~~~ v2.1D ~~~" +
+                "\n-fixed an error in the top 10 leaderboard calculation"
                 , "Changelog", MessageBoxButtons.OK);
         }
     }
