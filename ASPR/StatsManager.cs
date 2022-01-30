@@ -347,17 +347,5 @@ namespace ASPR
                     array[i, p] = stats[i, p];
             stats = array;
         }
-
-        /// <summary>
-        /// Switches 2 variables content, currently unused
-        /// </summary>
-        /// <param name="a">var 1</param>
-        /// <param name="b">var 2</param>
-        public void Switch(ref string a, ref string b)
-        {
-            string temp = a;
-            a = b;
-            b = temp;
-        }
     }
 }
