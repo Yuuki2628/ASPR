@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.lblPersonality = new System.Windows.Forms.Label();
             this.cmbPersonality = new System.Windows.Forms.ComboBox();
             this.cmbMonster = new System.Windows.Forms.ComboBox();
@@ -190,10 +191,10 @@
             this.Controls.Add(this.cmbPersonality);
             this.Controls.Add(this.lblPersonality);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmMain";
-            this.ShowIcon = false;
-            this.Text = "ASPR [v2.1D] by Yuuki";
+            this.Text = "ASPR [v2.2] by Yuuki";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).EndInit();
             this.ResumeLayout(false);

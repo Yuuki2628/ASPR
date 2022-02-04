@@ -91,11 +91,6 @@ namespace ASPR
             dgwData.Columns[0].Width = 120;
             dgwData.Columns[1].Width = 120;
 
-            /*btnInvisible.FlatStyle = FlatStyle.Flat;
-            btnInvisible.FlatAppearance.BorderColor = BackColor;
-            btnInvisible.FlatAppearance.MouseOverBackColor = BackColor;
-            btnInvisible.FlatAppearance.MouseDownBackColor = BackColor;*/
-
             //loads everything
             FullReload();
 
@@ -241,9 +236,9 @@ namespace ASPR
              */
             double[] finalStats = new double[] 
             {
-                GetDouble(enemyStats[1]) * GetDouble(enemyStats[3]) * GetDouble(enemyPersonality[1]),
-                GetDouble(enemyStats[1]) * GetDouble(enemyStats[4]) * GetDouble(enemyPersonality[1]),
-                GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]) * GetDouble(enemyPersonality[2])
+                Math.Round(GetDouble(enemyStats[1]) * GetDouble(enemyStats[3]) * GetDouble(enemyPersonality[1]), 2),
+                Math.Round(GetDouble(enemyStats[1]) * GetDouble(enemyStats[4]) * GetDouble(enemyPersonality[1]), 2),
+                Math.Round(GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]) * GetDouble(enemyPersonality[2]), 2)
             };
 
             //prints out everything on the table
@@ -270,7 +265,7 @@ namespace ASPR
                 if(!gotEm)
                 {
                     /* (HP * ((PhysicalResistance + MagicalResistance) / 2)) + (Diplomacy * PersuasionDefence) */
-                    double strength = (GetDouble(enemyStats[1]) * ((GetDouble(enemyStats[3]) + GetDouble(enemyStats[4])) / 2)) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5]));
+                    double strength = Math.Round((GetDouble(enemyStats[1]) * ((GetDouble(enemyStats[3]) + GetDouble(enemyStats[4])) / 2)) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5])), 2);
 
                     dgwData.Rows[10].Cells[0].Value = $"This not a top enemy";
                     dgwData.Rows[10].Cells[1].Value = $"Strength: {strength}";
@@ -329,7 +324,7 @@ namespace ASPR
                 };
 
                 /* (HP * ((PhysicalResistance + MagicalResistance) / 2)) + (Diplomacy * PersuasionDefence) */
-                double strength = (GetDouble(enemyStats[1]) * ((GetDouble(enemyStats[3]) + GetDouble(enemyStats[4])) / 2)) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5]));
+                double strength = Math.Round((GetDouble(enemyStats[1]) * ((GetDouble(enemyStats[3]) + GetDouble(enemyStats[4])) / 2)) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5])), 2);
 
                 for (int j = 0; j < 10; j++)
                 {
@@ -348,7 +343,7 @@ namespace ASPR
             }
         }
 
-        private double GetDouble(string s) => Math.Round((Double.Parse(s.Replace(',', '.'), CultureInfo.InvariantCulture)), 2);
+        private double GetDouble(string s) => Double.Parse(s.Replace(',', '.'), CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Moves the content of the list to the left by one adding the stronger one
@@ -440,7 +435,11 @@ namespace ASPR
                 "\n-now strength values are rounded to 2 decimals" +
                 "\n" +
                 "\n ~~~ v2.1D ~~~" +
-                "\n-fixed an error in the top 10 leaderboard calculation"
+                "\n-fixed an error in the top 10 leaderboard calculation" +
+                "\n" +
+                "\n ~~~ v2.2 ~~~" +
+                "\n-fixed rounding problems" +
+                "\n-added an app logo"
                 , "Changelog", MessageBoxButtons.OK);
         }
     }
