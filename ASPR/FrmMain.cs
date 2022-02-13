@@ -265,7 +265,7 @@ namespace ASPR
                 if(!gotEm)
                 {
                     /* (HP * ((PhysicalResistance + MagicalResistance) / 2)) + (Diplomacy * PersuasionDefence) */
-                    double strength = Math.Round((GetDouble(enemyStats[1]) * (GetDouble(enemyStats[3]) + GetDouble(enemyStats[4]))) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5])), 2);
+                    double strength = Math.Round(((GetDouble(enemyStats[1]) * GetDouble(enemyStats[3])) + (GetDouble(enemyStats[1]) * GetDouble(enemyStats[4])) + (GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]))), 2);
 
                     dgwData.Rows[10].Cells[0].Value = $"This not a top enemy";
                     dgwData.Rows[10].Cells[1].Value = $"Strength: {strength}";
@@ -324,8 +324,7 @@ namespace ASPR
                 };
 
                 /* (HP * ((PhysicalResistance + MagicalResistance) / 2)) + (Diplomacy * PersuasionDefence) */
-                double strength = Math.Round((GetDouble(enemyStats[1]) * (GetDouble(enemyStats[3]) + GetDouble(enemyStats[4]))) + (GetDouble(enemyStats[2]) + GetDouble(enemyStats[5])), 2);
-
+                double strength = Math.Round(((GetDouble(enemyStats[1]) * GetDouble(enemyStats[3])) + (GetDouble(enemyStats[1]) * GetDouble(enemyStats[4])) + (GetDouble(enemyStats[2]) * GetDouble(enemyStats[5]))), 2);
                 for (int j = 0; j < 10; j++)
                 {
                     if (j != 9 && strength > GetDouble(topTen[j, 1]))
@@ -440,8 +439,12 @@ namespace ASPR
                 "\n ~~~ v2.2 ~~~" +
                 "\n-fixed rounding problems" +
                 "\n-added an app logo" +
+                "\n" +
                 "\n ~~~ v2.3 ~~~" +
-                "\n-fixed strength calculation error"
+                "\n-fixed strength calculation error" +
+                "\n" +
+                "\n ~~~ v2.3B ~~~" +
+                "\n-fixed strength calculation error (yes again)"
                 , "Changelog", MessageBoxButtons.OK);
         }
     }
