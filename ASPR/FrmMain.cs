@@ -67,22 +67,16 @@ namespace ASPR
             dgwData.Rows[2].Cells[0].Value = "Physical Resistance:";
             dgwData.Rows[3].Cells[0].Value = "Magical Resistance:";
             dgwData.Rows[4].Cells[0].Value = "Persuasion Resistance:";
-            dgwData.Rows[5].Cells[0].Value = "Personality Values:";
-            dgwData.Rows[6].Cells[0].Value = "Final Results:";
-            dgwData.Rows[7].Cells[0].Value = "Stab:";
-            dgwData.Rows[8].Cells[0].Value = "Magic:";
-            dgwData.Rows[9].Cells[0].Value = "Diplomacy:";
-
-            //meme lol
-            dgwData.Rows[10].Cells[0].Value = "This part is useless...";
-            dgwData.Rows[10].Cells[1].Value = "Get Top 10 now";
+            dgwData.Rows[5].Cells[0].Value = "Personality Physical:";
+            dgwData.Rows[6].Cells[0].Value = "Personality Talk:";
+            dgwData.Rows[7].Cells[0].Value = "Final Results:";
+            dgwData.Rows[8].Cells[0].Value = "Stab:";
+            dgwData.Rows[9].Cells[0].Value = "Magic:";
+            dgwData.Rows[10].Cells[0].Value = "Diplomacy:";
 
             //setting the background for the separator line and meme line
-            dgwData.Rows[6].Cells[0].Style.BackColor = Color.DarkGray;
-            dgwData.Rows[6].Cells[1].Style.BackColor = Color.DarkGray;
-
-            dgwData.Rows[10].Cells[0].Style.BackColor = Color.DarkGray;
-            dgwData.Rows[10].Cells[1].Style.BackColor = Color.DarkGray;
+            dgwData.Rows[7].Cells[0].Style.BackColor = Color.DarkGray;
+            dgwData.Rows[7].Cells[1].Style.BackColor = Color.DarkGray;
 
             /* Hides the first annoying column */
             dgwData.RowHeadersVisible = false;
@@ -149,10 +143,6 @@ namespace ASPR
                 {"","0"},
                 {"","0"}
             };
-
-            //meme lol
-            dgwData.Rows[10].Cells[0].Value = "This part is useless...";
-            dgwData.Rows[10].Cells[1].Value = "Get Top 10 now";
 
             btnGetTop.Text = "Get Top";
         }
@@ -247,10 +237,11 @@ namespace ASPR
             dgwData.Rows[2].Cells[1].Value = $"{enemyStats[3]}";
             dgwData.Rows[3].Cells[1].Value = $"{enemyStats[4]}";
             dgwData.Rows[4].Cells[1].Value = $"{enemyStats[5]}";
-            dgwData.Rows[5].Cells[1].Value = $"{enemyPersonality[1]} / {enemyPersonality[2]}";
-            dgwData.Rows[7].Cells[1].Value = $"{finalStats[0]}";
-            dgwData.Rows[8].Cells[1].Value = $"{finalStats[1]}";
-            dgwData.Rows[9].Cells[1].Value = $"{finalStats[2]}";
+            dgwData.Rows[5].Cells[1].Value = $"{enemyPersonality[1]}";
+            dgwData.Rows[6].Cells[1].Value = $"{enemyPersonality[2]}";
+            dgwData.Rows[8].Cells[1].Value = $"{finalStats[0]}";
+            dgwData.Rows[9].Cells[1].Value = $"{finalStats[1]}";
+            dgwData.Rows[10].Cells[1].Value = $"{finalStats[2]}";
 
             if (topTen[0, 0] != "")
             {
@@ -444,7 +435,10 @@ namespace ASPR
                 "\n-fixed strength calculation error" +
                 "\n" +
                 "\n ~~~ v2.3B ~~~" +
-                "\n-fixed strength calculation error (yes again)"
+                "\n-fixed strength calculation error (yes again)" +
+                "\n" +
+                "\n ~~~ v2.3C ~~~" +
+                "\n-Separated personality multiplers into two different rows because Inf1nab kept asking me to do it."
                 , "Changelog", MessageBoxButtons.OK);
         }
     }
